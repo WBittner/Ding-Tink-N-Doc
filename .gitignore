@@ -2,6 +2,9 @@
 typings
 node_modules
 
+# Don't host db stuff
+data
+
 # Only JS files are generated or config - no need to upload that ;)
 *.js
 
