@@ -1,0 +1,27 @@
+{
+  "name": "ding-tink-n-doc",
+  "version": "1.0.0",
+  "description": "\u0016Ding 'N Tink Partner up with Doc to bring you their very first Discord service",
+  "main": "bot.js",
+  "scripts": {
+    "dev": "nodemon bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://WBittner@github.com/WBittner/Ding-Tink-N-Doc.git"
+  },
+  "author": "William Bittner",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/WBittner/Ding-Tink-N-Doc/issues"
+  },
+  "homepage": "https://github.com/WBittner/Ding-Tink-N-Doc#readme",
+  "dependencies": {
+    "discord.js": "^9.3.0",
+    "nodemon": "^1.11.0",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0",
+    "ws": "^1.1.1"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "ding-tink-n-doc",
+  "dependencies": {},
+  "globalDependencies": {
+    "node": "registry:dt/node#6.0.0+20160928143418",
+    "ws": "registry:dt/ws#0.0.0+20161003184106"
+  }
+}
