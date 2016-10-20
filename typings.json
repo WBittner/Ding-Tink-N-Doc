@@ -1,8 +1,10 @@
 {
   "name": "ding-tink-n-doc",
-  "dependencies": {},
+  "dependencies": {
+    "mongoose": "registry:npm/mongoose#4.3.5+20160628072220"
+  },
   "globalDependencies": {
-    "node": "registry:dt/node#6.0.0+20160928143418",
+    "node": "registry:dt/node#6.0.0+20161019125345",
     "ws": "registry:dt/ws#0.0.0+20161003184106"
   }
 }

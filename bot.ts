@@ -1,4 +1,6 @@
-//Main point of communication with Ding, Tink, and Doc!
+/**
+ * The bot - main point of user communication with the team!
+ */
 
 // Ty hydrabolt!
 import * as Discord from 'discord.js';
@@ -6,23 +8,39 @@ import * as Discord from 'discord.js';
 // Config get
 const config = require('./config.js'); 
 
+// Assemble the team
+import {Ding} from "./src/controller/Ding";
+import {Tink} from "./src/controller/Tink";
+import {DongoMD} from "./src/controller/doc";
+
+// Legooooo
 var bot = new Discord.Client();
 
-bot.on('ready', onReady);
+var ding:Ding, tink:Tink, doc:DongoMD;
 
-function onReady() {
+
+bot.on('ready', function onReady() {
     console.log("OH BOY! IT'S " + bot.user + "!");
-}
+    ding = new Ding(bot.user);
+    tink = new Tink(bot.user);
+    doc = new DongoMD(bot.user);
 
-bot.on('message', onMessage);
+    // The poor bot is just too busy being the POC for users to the team to handle the communication between the team members,
+    //  so the bot gave them all cell phones and they can just direct call each other. (TL;DR: The boy- er... bot... is feeling lazy.)
+    var contacts = {
+        Ding: ding,
+        Tink: tink,
+        Doc: doc
+    };
 
-function onMessage(message:Discord.Message) {
-    if(message.author != bot.user) {
-        console.log("u: " + message.author + ", client: " + message.client + ", ch: " + message.channel + ", msg: " + message.content + "msg:");
-        console.log(message);
-        message.channel.sendMessage("Ding: Howdy " + message.author + "!");
-        message.channel.sendMessage("Tink: The Doctor will be with you momentarily!");
-    }
-}
+    // Time to put that training to use!
+    ding.addContactsToPhone(contacts);
+    tink.addContactsToPhone(contacts);
+    doc.addContactsToPhone(contacts);
 
-bot.login(config.Token);
+    // Want to have bot defer to ding, not steal his handleMessage functionality
+    //  After all, the bot is no employee! He just doesn't have the bedside manner.
+    bot.on('message', ding.handleMessage.bind(ding));
+});
+
+bot.login(config.token);
