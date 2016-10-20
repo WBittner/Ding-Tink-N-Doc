@@ -1,0 +1,9 @@
+# Don't host the stuff we're grabbing via npm
+typings
+node_modules
+
+# Only JS files are generated or config - no need to upload that ;)
+js
+
+# Javascript mapping files
+*.js.map
