@@ -2,7 +2,7 @@
  * Ding - he's the workhorse of the siblings.  He might also be a hoarder.
  */
 
-// BOT! TALK TO ME!
+// "BOT! TALK TO ME!"
 import * as Discord from "discord.js";
 
 // He's done his training... a couple times. Third time's the charm!
@@ -21,14 +21,13 @@ export class Ding extends Employee {
         super("Ding", id);
     }
 
-    /**
-     * Despite not always making the flashiest of discoveries, Ding is always on the
-     *  lookout to gather data. Perhaps that's why there's so much lying around everywhere..
-     */
-    public handleMessage(message: Discord.Message) {
-        if(message.author != this.id) {
-            this.sendMessage("Howdy " + message.author + "!", message.channel);
-            this.Tink.sendMessage("The Doctor will be with you momentarily!", message.channel);
+    // Ding never passes up the opportunity to grab some additional research
+    //  As such, he'll take anything that comes his way
+    public handleMessage(message: Discord.Message){
+        // "DOOOOOC! I FOUND SOMETHING!"
+        if(this.extractFirstWord(message.content)[0] !== "!"){
+            this.Doc.addDocumentToDataStore(message);
         }
     }
+
 }

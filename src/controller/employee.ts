@@ -6,14 +6,29 @@
 import * as Discord from "discord.js";
 
 export class Employee {
-    constructor(public name: string, public id: Discord.User) {}
+    public messageEvents: any;
+    constructor(public name: string, public id: Discord.User) {
+        this.messageEvents = {};
+    }
 
     /**
      * Mandatory user interaction training - remember: The customer is always right!
      */
-    sendMessage(message: string, channel:Discord.Channel) {
+    public sendMessage(message: string, channel:Discord.Channel) {
         if(channel instanceof Discord.TextChannel) {
             channel.sendMessage("Incoming message from " + this.name + ": \n" + message);
+        }
+    }
+
+    /**
+     * Each employee is, of course, specialized within their fields
+     */
+    public handleMessage(message: Discord.Message) {
+        var command:string = this.extractFirstWord(message.content);
+
+        if(typeof this.messageEvents[command] === "function") {
+            var body: string = message.content.substring(command.length + 1);
+            this.messageEvents[command](message, body, command);
         }
     }
 
@@ -27,5 +42,22 @@ export class Employee {
                 this[contact] = contacts[contact];
             }
         }
+    }
+
+    /**
+     * To make sure everyone is accounted for, employees were given training on how to clock in -
+     *  including how to make note of what they're doing this shift.
+     */
+    clockIn(tasks: any) {
+        for(var task in tasks) {
+            this.messageEvents[task] = tasks[task];
+        }
+    }
+
+    /**
+     * Understanding what the user wants really is an important trait in an employee
+     */
+    extractFirstWord(s: string): string {
+        return s.split(" ")[0];
     }
 }

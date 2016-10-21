@@ -38,9 +38,17 @@ bot.on('ready', function onReady() {
     tink.addContactsToPhone(contacts);
     doc.addContactsToPhone(contacts);
 
-    // Want to have bot defer to ding, not steal his handleMessage functionality
+    // Want to have bot defer to the employees, not steal their functionality
     //  After all, the bot is no employee! He just doesn't have the bedside manner.
-    bot.on('message', ding.handleMessage.bind(ding));
+    bot.on('message', function(message) {
+        // The bot doesn't care about the quarreling of the team members or the chat system itself,
+        //  only the users.
+        if(message.author != bot.user && !message.system) {
+            ding.handleMessage.call(ding, message);
+            tink.handleMessage.call(tink, message);
+            doc.handleMessage.call(doc, message);
+        }
+    });
 });
 
 bot.login(config.token);
